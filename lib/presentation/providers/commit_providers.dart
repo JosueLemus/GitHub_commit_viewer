@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:github_commit_viewer/config/constants/github_account_constants.dart';
 import 'package:github_commit_viewer/domain/entities/commit.dart';
 import 'package:github_commit_viewer/presentation/providers/commits_repository_provider.dart';
 
@@ -7,8 +8,8 @@ final nowPlayingMoviesProvider =
   final fetchMoreCommits = ref.watch(commitsRepositoryProvider).getCommitList;
   return CommitsNotifier(
     fetchMoreCommits: fetchMoreCommits,
-    owner: 'JosueLemus',
-    repo: 'bomberos_ya',
+    owner: GithubAccountConstants.defaultOwner,
+    repo: GithubAccountConstants.defaultRepo,
   );
 });
 

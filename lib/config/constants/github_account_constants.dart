@@ -1,0 +1,4 @@
+class GithubAccountConstants {
+  static String defaultOwner = 'JosueLemus';
+  static String defaultRepo = 'bomberos_ya';
+}
