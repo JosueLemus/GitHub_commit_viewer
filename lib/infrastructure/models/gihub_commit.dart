@@ -1,7 +1,7 @@
 class GithubCommit {
   String sha;
   String nodeId;
-  Commit commit;
+  CommitData commit;
   CommitAuthor author;
   CommitAuthor committer;
 
@@ -16,7 +16,7 @@ class GithubCommit {
   factory GithubCommit.fromJson(Map<String, dynamic> json) => GithubCommit(
         sha: json["sha"],
         nodeId: json["node_id"],
-        commit: Commit.fromJson(json["commit"]),
+        commit: CommitData.fromJson(json["commit"]),
         author: CommitAuthor.fromJson(json["author"]),
         committer: CommitAuthor.fromJson(json["committer"]),
       );
@@ -119,7 +119,7 @@ class CommitAuthor {
       };
 }
 
-class Commit {
+class CommitData {
   CommitAuthorClass author;
   CommitAuthorClass committer;
   String message;
@@ -127,7 +127,7 @@ class Commit {
   String url;
   int commentCount;
 
-  Commit({
+  CommitData({
     required this.author,
     required this.committer,
     required this.message,
@@ -136,7 +136,7 @@ class Commit {
     required this.commentCount,
   });
 
-  factory Commit.fromJson(Map<String, dynamic> json) => Commit(
+  factory CommitData.fromJson(Map<String, dynamic> json) => CommitData(
         author: CommitAuthorClass.fromJson(json["author"]),
         committer: CommitAuthorClass.fromJson(json["committer"]),
         message: json["message"],
