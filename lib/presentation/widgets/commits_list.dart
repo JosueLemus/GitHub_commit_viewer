@@ -56,7 +56,19 @@ class CommitsListState extends ConsumerState<CommitsList> {
           height: 100,
         ));
       } else {
-        return const Text("NO DATA FOUND");
+        return Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text("NO DATA FOUND"),
+              const SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: _refreshData,
+                child: const Text("Retry"),
+              ),
+            ],
+          ),
+        );
       }
     }
 

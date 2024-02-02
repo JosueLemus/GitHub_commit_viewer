@@ -11,7 +11,7 @@ class CommitGithubAPIDataSource extends CommitsDatasource {
   Future<List<Commit>> getCommitList(String owner, String repo, int page,
       {int perPage = 10}) async {
     try {
-      final queryParameters = {'page': '$page', 'per_page': '$perPage'};
+      final queryParameters = {'page': '$page', 'per_page': '10'};
       final url = Uri.https(
           "api.github.com", '/repos/$owner/$repo/commits', queryParameters);
       final response = await http.get(url);

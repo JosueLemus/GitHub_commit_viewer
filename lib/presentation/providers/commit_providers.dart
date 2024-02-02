@@ -41,6 +41,9 @@ class CommitsNotifier extends StateNotifier<List<Commit>> {
       state = [...state, ...commits];
     } catch (e) {
       print("Error fetching commits: $e");
+      if (state.isEmpty) {
+        state = [];
+      }
     } finally {
       isLoading = false;
     }
