@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:github_commit_viewer/presentation/providers/commit_providers.dart';
+import 'package:github_commit_viewer/presentation/widgets/commit_card.dart';
 
 class CommitsList extends ConsumerStatefulWidget {
   const CommitsList({Key? key}) : super(key: key);
@@ -54,7 +55,7 @@ class CommitsListState extends ConsumerState<CommitsList> {
         controller: _scrollController,
         itemCount: commitsList.length,
         itemBuilder: (context, index) {
-          return Text(commitsList[index].message);
+          return CommitCard(commit: commitsList[index]);
         },
       ),
     );
