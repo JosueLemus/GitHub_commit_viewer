@@ -34,8 +34,9 @@ class CommitsNotifier extends StateNotifier<List<Commit>> {
     isLoading = true;
 
     currentPage++;
-    final List<Commit> commits =
-        await fetchMoreCommits(owner, repo, currentPage, perPage: 20);
+    final List<Commit> commits = await fetchMoreCommits(
+        owner, repo, currentPage,
+        perPage: GithubAccountConstants.commitsPerPage);
     state = [...state, ...commits];
 
     await Future.delayed(const Duration(milliseconds: 300));
