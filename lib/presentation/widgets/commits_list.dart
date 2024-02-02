@@ -47,6 +47,8 @@ class CommitsListState extends ConsumerState<CommitsList> {
   Widget build(BuildContext context) {
     final commitsList = ref.watch(commitsProvider);
     final isLoading = ref.watch(commitsProvider.notifier).isLoading;
+    double horizontalMargin = MediaQuery.of(context).size.width > 600 ? 40 : 12;
+
     if (commitsList.isEmpty) {
       if (isLoading) {
         return Center(
@@ -82,7 +84,8 @@ class CommitsListState extends ConsumerState<CommitsList> {
         child: ListView.builder(
           controller: _scrollController,
           itemCount: commitsList.length,
-          padding: const EdgeInsets.fromLTRB(12, 12, 12, 32),
+          padding:
+              EdgeInsets.fromLTRB(horizontalMargin, 12, horizontalMargin, 32),
           itemBuilder: (context, index) {
             final commit = commitsList[index];
             bool isSameDate = true;
