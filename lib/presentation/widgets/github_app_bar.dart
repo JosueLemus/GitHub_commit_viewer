@@ -17,16 +17,18 @@ class GithubAppBar extends ConsumerWidget implements PreferredSizeWidget {
       title: Row(
         children: [
           Container(
-            width: 50,
-            height: 50,
+            width: 44,
+            height: 44,
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: isDarkmode ? Colors.white : null,
               borderRadius: BorderRadius.circular(25),
             ),
-            child: Padding(
-              padding: const EdgeInsets.only(top: 8),
-              child: Image.asset("assets/github-dark-mode.png"),
-            ),
+            child: isDarkmode
+                ? Padding(
+                    padding: const EdgeInsets.only(top: 6),
+                    child: Image.asset("assets/github-dark-mode.png"),
+                  )
+                : Image.asset("assets/github-light-mode.png"),
           ),
           const SizedBox(width: 12),
           Column(
