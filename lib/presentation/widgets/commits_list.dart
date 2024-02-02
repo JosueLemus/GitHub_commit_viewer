@@ -55,9 +55,11 @@ class CommitsListState extends ConsumerState<CommitsList> {
       child: ListView.builder(
         controller: _scrollController,
         itemCount: commitsList.length,
+        padding: const EdgeInsets.fromLTRB(12, 12, 12, 32),
         itemBuilder: (context, index) {
           final commit = commitsList[index];
           bool isSameDate = true;
+          bool isLastInSection = false;
           final DateTime date = commit.commitDate;
           if (index == 0) {
             isSameDate = false;
@@ -65,11 +67,20 @@ class CommitsListState extends ConsumerState<CommitsList> {
             final DateTime prevDate = commitsList[index - 1].commitDate;
             isSameDate = date.isSameDate(prevDate);
           }
-          if (index == 0 || !(isSameDate)) {
+          if (index + 2 > commitsList.length) {
+            isLastInSection = true;
+          } else {
+            final DateTime nextDate = commitsList[index + 1].commitDate;
+            isLastInSection = !date.isSameDate(nextDate);
+          }
+
+          if (index == 0 || !isSameDate) {
             return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  child: Row(
                     children: [
                       const Icon(
                         Icons.adjust,
@@ -81,10 +92,14 @@ class CommitsListState extends ConsumerState<CommitsList> {
                       Text("Commits on ${date.formatDate()}"),
                     ],
                   ),
-                  CommitCard(commit: commit)
-                ]);
+                ),
+                CommitCard(
+                    commit: commit, isFirst: true, isLast: isLastInSection),
+              ],
+            );
           } else {
-            return CommitCard(commit: commit);
+            return CommitCard(
+                commit: commit, isFirst: false, isLast: isLastInSection);
           }
         },
       ),
