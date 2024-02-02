@@ -56,10 +56,14 @@ class CommitCard extends StatelessWidget {
                           height: 16,
                         ),
                       ),
-                      const SizedBox(
-                        width: 4,
+                      const SizedBox(width: 4),
+                      Flexible(
+                        child: Text(
+                          commit.author,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                        ),
                       ),
-                      Text(commit.author),
                       const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 8),
                         child: Icon(
@@ -67,7 +71,13 @@ class CommitCard extends StatelessWidget {
                           size: 6,
                         ),
                       ),
-                      Text(timeago.format(commit.commitDate)),
+                      Flexible(
+                        child: Text(
+                          timeago.format(commit.commitDate),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                        ),
+                      ),
                     ],
                   )
                 ],
