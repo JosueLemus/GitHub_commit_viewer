@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:github_commit_viewer/config/constants/github_account_constants.dart';
+import 'package:github_commit_viewer/presentation/providers/theme_provider.dart';
 
-class GithubAppBar extends StatelessWidget implements PreferredSizeWidget {
+class GithubAppBar extends ConsumerWidget implements PreferredSizeWidget {
   const GithubAppBar({Key? key}) : super(key: key);
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
+    final isDarkmode = ref.watch(themeNotifierProvider).isDarkmode;
+
     return AppBar(
       title: Row(
         children: [
@@ -43,9 +47,12 @@ class GithubAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       actions: [
         IconButton(
-          icon: const Icon(Icons.brightness_6),
-          onPressed: () {},
-        ),
+            icon: Icon(isDarkmode
+                ? Icons.dark_mode_outlined
+                : Icons.light_mode_outlined),
+            onPressed: () {
+              ref.read(themeNotifierProvider.notifier).toggleDarkmode();
+            })
       ],
     );
   }
