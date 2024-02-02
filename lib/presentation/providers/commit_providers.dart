@@ -42,4 +42,10 @@ class CommitsNotifier extends StateNotifier<List<Commit>> {
     await Future.delayed(const Duration(milliseconds: 300));
     isLoading = false;
   }
+
+  Future<void> reloadData() async {
+    currentPage = 0;
+    isLoading = false;
+    state = [];
+  }
 }
