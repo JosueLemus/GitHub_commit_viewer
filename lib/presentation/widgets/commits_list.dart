@@ -79,7 +79,7 @@ class CommitsListState extends ConsumerState<CommitsList> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  padding: const EdgeInsets.symmetric(vertical: 14),
                   child: Row(
                     children: [
                       const Icon(
