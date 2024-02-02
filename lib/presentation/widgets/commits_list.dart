@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:github_commit_viewer/config/helpers/date_helper.dart';
 import 'package:github_commit_viewer/presentation/providers/commit_providers.dart';
 import 'package:github_commit_viewer/presentation/widgets/commit_card.dart';
 
@@ -55,7 +56,36 @@ class CommitsListState extends ConsumerState<CommitsList> {
         controller: _scrollController,
         itemCount: commitsList.length,
         itemBuilder: (context, index) {
-          return CommitCard(commit: commitsList[index]);
+          final commit = commitsList[index];
+          bool isSameDate = true;
+          final DateTime date = commit.commitDate;
+          if (index == 0) {
+            isSameDate = false;
+          } else {
+            final DateTime prevDate = commitsList[index - 1].commitDate;
+            isSameDate = date.isSameDate(prevDate);
+          }
+          if (index == 0 || !(isSameDate)) {
+            return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      const Icon(
+                        Icons.adjust,
+                        size: 16,
+                      ),
+                      const SizedBox(
+                        width: 8,
+                      ),
+                      Text("Commits on ${date.formatDate()}"),
+                    ],
+                  ),
+                  CommitCard(commit: commit)
+                ]);
+          } else {
+            return CommitCard(commit: commit);
+          }
         },
       ),
     );
