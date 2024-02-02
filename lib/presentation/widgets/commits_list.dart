@@ -46,9 +46,18 @@ class CommitsListState extends ConsumerState<CommitsList> {
   @override
   Widget build(BuildContext context) {
     final commitsList = ref.watch(commitsProvider);
-
+    final isLoading = ref.watch(commitsProvider.notifier).isLoading;
     if (commitsList.isEmpty) {
-      return const Center(child: CircularProgressIndicator());
+      if (isLoading) {
+        return Center(
+            child: Image.asset(
+          "assets/git_loading.gif",
+          width: 100,
+          height: 100,
+        ));
+      } else {
+        return const Text("NO DATA FOUND");
+      }
     }
 
     return NotificationListener<ScrollEndNotification>(

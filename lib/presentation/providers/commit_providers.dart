@@ -34,13 +34,16 @@ class CommitsNotifier extends StateNotifier<List<Commit>> {
     isLoading = true;
 
     currentPage++;
-    final List<Commit> commits = await fetchMoreCommits(
-        owner, repo, currentPage,
-        perPage: GithubAccountConstants.commitsPerPage);
-    state = [...state, ...commits];
-
-    await Future.delayed(const Duration(milliseconds: 300));
-    isLoading = false;
+    try {
+      final List<Commit> commits = await fetchMoreCommits(
+          owner, repo, currentPage,
+          perPage: GithubAccountConstants.commitsPerPage);
+      state = [...state, ...commits];
+    } catch (e) {
+      print("Error fetching commits: $e");
+    } finally {
+      isLoading = false;
+    }
   }
 
   Future<void> reloadData() async {
