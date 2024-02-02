@@ -6,7 +6,8 @@ class CommitMapper {
       sha: githubCommit.sha,
       commitId: githubCommit.sha.substring(0, 7),
       message: githubCommit.commit.message,
-      author: githubCommit.committer.login,
-      avatarUrl: githubCommit.committer.avatarUrl,
+      author: githubCommit.commit.author.name,
+      avatarUrl: githubCommit.committer?.avatarUrl ??
+          "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
       commitDate: githubCommit.commit.committer.date);
 }
