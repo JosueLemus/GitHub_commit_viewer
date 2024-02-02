@@ -3,7 +3,7 @@ import 'package:github_commit_viewer/config/constants/github_account_constants.d
 import 'package:github_commit_viewer/domain/entities/commit.dart';
 import 'package:github_commit_viewer/presentation/providers/commits_repository_provider.dart';
 
-final nowPlayingMoviesProvider =
+final commitsProvider =
     StateNotifierProvider<CommitsNotifier, List<Commit>>((ref) {
   final fetchMoreCommits = ref.watch(commitsRepositoryProvider).getCommitList;
   return CommitsNotifier(
@@ -13,8 +13,8 @@ final nowPlayingMoviesProvider =
   );
 });
 
-typedef CommitCallback = Future<List<Commit>> Function(
-    String owner, String repo, int page);
+typedef CommitCallback = Future<List<Commit>>
+    Function(String owner, String repo, int page, {int perPage});
 
 class CommitsNotifier extends StateNotifier<List<Commit>> {
   int currentPage = 0;
@@ -35,7 +35,7 @@ class CommitsNotifier extends StateNotifier<List<Commit>> {
 
     currentPage++;
     final List<Commit> commits =
-        await fetchMoreCommits(owner, repo, currentPage);
+        await fetchMoreCommits(owner, repo, currentPage, perPage: 20);
     state = [...state, ...commits];
 
     await Future.delayed(const Duration(milliseconds: 300));
