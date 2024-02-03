@@ -79,7 +79,7 @@ flutter run
 ## Run on web
 
 ```bash
-flutter run -d web
+flutter run -d chrome --web-renderer html
 ```
 
 This will launch the application in a web browser.
