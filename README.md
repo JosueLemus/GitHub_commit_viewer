@@ -1,6 +1,9 @@
 # GitHub Commits Viewer
 
 A Flutter application to display commits from a GitHub repository using the GitHub API.
+![Captura de Pantalla 2024-02-03 a la(s) 15 08 53](https://github.com/JosueLemus/GitHub_commit_viewer/assets/27253676/c0896ca9-21d4-48a7-9926-f62e0ee2bd7e)
+
+
 
 ## Configuration
 
